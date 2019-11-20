@@ -20,9 +20,11 @@ def login():
     email_error = ""
     if len(username) < 3 or len(username) > 20:
         username_error = "Username must be 3-20 characters long"
+        username = ""
     else:
         if username.find(" ") >= 1:
             username_error = "Username must not include spaces"
+            username = ""
     if len(password1) < 3 or len(password1) > 20:
         password1_error = "Password must be 3-20 characters long"
     else:
@@ -33,15 +35,20 @@ def login():
     if email != "":
         if len(email) < 3 or len(email) > 20:
             email_error = "Email must be 3-20 characters long"
+            email = ""
         else:
             if email.find(" ") >= 1:
                 email_error = "Email must not include spaces"
+                email = ""
             elif email.find(".") == 0 and email.find("@") == 0:
                 email_error = "Email must include at least 1 @ and ."
+                email = ""
             elif email.find(".") == 0:
                 email_error = "Email must include at least 1 ."
+                email = ""
             elif email.find("@") == 0:
                 email_error = "Email must include at least 1 @"
+                email = ""
     if not username_error and not password1_error and not password2_error and not email_error:
         return render_template("login.html", username=username)
     else:
