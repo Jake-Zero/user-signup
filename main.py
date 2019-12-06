@@ -22,13 +22,13 @@ def login():
         username_error = "Username must be 3-20 characters long"
         username = ""
     else:
-        if username.find(" ") >= 1:
+        if username.count(" ") >= 1:
             username_error = "Username must not include spaces"
             username = ""
     if len(password1) < 3 or len(password1) > 20:
         password1_error = "Password must be 3-20 characters long"
     else:
-        if password1.find(" ") >= 1:
+        if password1.count(" ") >= 1:
             password1_error = "Password must not include spaces"
     if password2 != password1:
         password2_error = "Passwords must match"
@@ -37,17 +37,17 @@ def login():
             email_error = "Email must be 3-20 characters long"
             email = ""
         else:
-            if email.find(" ") >= 1:
+            if email.count(" ") >= 1:
                 email_error = "Email must not include spaces"
                 email = ""
-            elif email.find(".") == 0 and email.find("@") == 0:
-                email_error = "Email must include at least 1 @ and ."
+            elif email.count(".") != 1 and email.count("@") != 1:
+                email_error = "Email must include 1 @ and ."
                 email = ""
-            elif email.find(".") == 0:
-                email_error = "Email must include at least 1 ."
+            elif email.count(".") != 1:
+                email_error = "Email must include 1 ."
                 email = ""
-            elif email.find("@") == 0:
-                email_error = "Email must include at least 1 @"
+            elif email.count("@") != 1:
+                email_error = "Email must include 1 @"
                 email = ""
     if not username_error and not password1_error and not password2_error and not email_error:
         return render_template("login.html", username=username)
